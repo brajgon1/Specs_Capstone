@@ -3,13 +3,14 @@ import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Header from "./components/Navigation/Header";
+import Login from "./components/LoginFolder/Login";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [list, setList] = useState([]);
 
-  // const getAllMovies = () => {
+  // const getData = () => {
   //   {
   //     const apiKey = process.env.REACT_APP_API_KEY;
   //     axios
@@ -24,10 +25,15 @@ function App() {
   // };
 
   // useEffect(() => {
-  //   getAllMovies();
+  //   getData();
   // }, [page]);
 
-  return <div className="App"><Header/></div>;
+  return (
+    <div className="App">
+      <Header />
+      <Login />
+    </div>
+  );
 }
 
 export default App;

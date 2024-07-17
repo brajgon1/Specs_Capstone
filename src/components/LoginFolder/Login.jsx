@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+
 
 const Login = () => {
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+        setError("");
+        setSuccess("");
+    }
+
+    try {
+        
+    }
+
     return (
         <div>
             <div className="login">
