@@ -15,10 +15,6 @@ const Login = () => {
         setSuccess("");
     }
 
-    try {
-        
-    }
-
     return (
         <div>
             <div className="login">
