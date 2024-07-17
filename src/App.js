@@ -9,22 +9,23 @@ function App() {
   const [page, setPage] = useState(1);
   const [list, setList] = useState([]);
 
-  const getAllMovies = () => {
-    {
-      const apiKey = process.env.REACT_APP_API_KEY;
-      axios
-        .get(
-          `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`
-        )
-        .then((res) => {
-          setMovies(res.data.results);
-        });
-    }
-  };
+  // const getAllMovies = () => {
+  //   {
+  //     const apiKey = process.env.REACT_APP_API_KEY;
+  //     axios
+  //       .get(
+  //         `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`
+  //       )
+  //       .then((res) => {
+  //         console.log(res.data.results);
+  //         setMovies(res.data.results);
+  //       });
+  //   }
+  // };
 
-  useEffect(() => {
-    getAllMovies();
-  }, [page]);
+  // useEffect(() => {
+  //   getAllMovies();
+  // }, [page]);
 
   return <div className="App"><Header/></div>;
 }
