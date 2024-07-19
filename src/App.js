@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Header from "./components/Navigation/Header";
 import Login from "./components/LoginFolder/Login";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   const [movies, setMovies] = useState([]);
