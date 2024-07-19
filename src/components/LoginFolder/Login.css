@@ -1,0 +1,117 @@
+.register {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    padding: 20px;
+    width: 320px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.register input {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.register button {
+    width: 50%;
+    padding: 10px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 5px;
+    background-color: #0004ff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.register button:hover {
+    background-color: #0056b3;
+}
+
+.register p button {
+    background: none;
+    color: #007BFF;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: underline;
+    padding: 0;
+}
+
+.register p button:hover {
+    background: none;
+    color: #007BFF;
+}
+
+.register p {
+    margin: 15px 0 0;
+}
+
+.register h2 {
+    margin-bottom: 10px;
+}
+
+.login {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    padding: 20px;
+    width: 320px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.login input {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.login button {
+    width: 50%;
+    padding: 10px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 5px;
+    background-color: #0004ff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.login button:hover {
+    background-color: #0056b3;
+}
+
+.login p button {
+    background: none;
+    color: #007BFF;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: underline;
+    padding: 0;
+}
+
+.login p button:hover {
+    background: none;
+    color: #007BFF;
+}
+
+.login p {
+    margin: 15px 0 0;
+}
+
+.login h2 {
+    margin-bottom: 10px;
+}

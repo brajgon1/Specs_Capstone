@@ -1,10 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import supabase from "../../config/supabaseClient";
+import './Login.css' 
 
 const Login = () => {
   console.log(supabase);
-  
+
+  const navigate = useNavigate()
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -20,6 +24,7 @@ const Login = () => {
       .post(register ? "/register" : "/login", body)
       .then((res) => {
         console.log(res.data);
+        navigate("/")
       })
       .catch((err) => {
         console.error(err);
@@ -30,7 +35,7 @@ const Login = () => {
     <div>
       {register ? (
         <div className="register">
-          <h2>Register</h2>
+          <h1>Register</h1>
           <form onSubmit={submitHandler}>
             <input
               type="text"

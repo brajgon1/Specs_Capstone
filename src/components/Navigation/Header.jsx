@@ -16,6 +16,11 @@ const Header = () => {
       <nav className="header-nav">
         <ul className="main-nav">
           <li>
+            <NavLink style={styleActiveLink} to="/movies" >
+              Home
+            </NavLink>
+          </li>
+          <li>
             <NavLink style={styleActiveLink} to="/" >
               Profile
             </NavLink>
@@ -23,11 +28,6 @@ const Header = () => {
           <li>
             <NavLink style={styleActiveLink} to="/about" >
               Watchlist
-            </NavLink>
-          </li>
-          <li>
-            <NavLink style={styleActiveLink} to="/movies" >
-              Movies
             </NavLink>
           </li>
         </ul>
