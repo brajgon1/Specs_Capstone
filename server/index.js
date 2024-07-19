@@ -7,5 +7,9 @@ const PORT = process.env.PORT || 4005;
 app.use(cors());
 app.use(express.json());
 
+// routes
+app.post('/register', register);
+app.post('/login', login);
+
 // app.get('/api/movie', getMovies);
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
