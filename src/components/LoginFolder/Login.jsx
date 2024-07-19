@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
+import supabase from "../../config/supabaseClient";
 
 const Login = () => {
+  console.log(supabase);
+  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
