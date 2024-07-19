@@ -16,17 +16,17 @@ const Header = () => {
       <nav className="header-nav">
         <ul className="main-nav">
           <li>
-            <NavLink style={styleActiveLink} to="/movies" >
+            <NavLink style={styleActiveLink} to="/home" >
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink style={styleActiveLink} to="/" >
+            <NavLink style={styleActiveLink} to="/profile" >
               Profile
             </NavLink>
           </li>
           <li>
-            <NavLink style={styleActiveLink} to="/about" >
+            <NavLink style={styleActiveLink} to="/watchlist" >
               Watchlist
             </NavLink>
           </li>

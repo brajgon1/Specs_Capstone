@@ -3,8 +3,9 @@ import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Header from "./components/Navigation/Header";
-import Login from "./components/LoginFolder/Login";
-import { Route, Routes } from "react-router-dom";
+import Home from "./components/LoginFolder/Home";
+import Profile from "./components/LoginFolder/Profile";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -32,7 +33,8 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Login />
+      <Home />
+      <Profile />
     </div>
   );
 }
