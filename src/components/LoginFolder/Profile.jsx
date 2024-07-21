@@ -1,5 +1,5 @@
 // import MovieCard from "../Movies/MovieCard";
-import WatchList from "../Watchlist/Watchlist";
+// import WatchList from "../Watchlist/Watchlist";
 import TopFavorite from "../Favorites/TopFavorites";
 import "./Profile.css";
 
