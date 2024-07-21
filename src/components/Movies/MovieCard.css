@@ -2,12 +2,38 @@
     box-shadow: 2px 2px 5px #444241;
     border-radius: 20px;
     margin-top: 50px;
-    margin: 50px;
+    margin: auto;
+    padding: 15px;
     height: 500px;
-    width: 500px;
+    width: 300px; 
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     background-color: white;
+    box-sizing: border-box;
+}
+
+.movie-card img {
+    max-width: 100%; 
+    height: auto;
+    border-radius: 10px; 
+}
+
+.movie-card h3 {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.movie-card p {
+    margin: 5px 0; 
+    text-align: center;
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
