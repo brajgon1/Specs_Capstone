@@ -1,3 +1,4 @@
+import MovieCard from "../Movies/MovieCard";
 import "./Profile.css";
 
 const Profile = () => {
@@ -11,7 +12,7 @@ const Profile = () => {
         />
         <h1 className="username">PlaceholderUsername</h1>
       </div>
-      <div className="favorite-movie-list">Favorite Movies</div>
+      <div className="favorite-movie-list"><MovieCard/></div>
     </div>
   );
 };

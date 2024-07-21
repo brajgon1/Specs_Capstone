@@ -1,7 +1,15 @@
-import Rating from "../Rating/Rating"
+import Rating from "../Rating/Rating";
+import './MovieCard.css';
 
 const MovieCard = () => {
     return(
-        <h2>asdf</h2>
+        <div>
+            <div className="movie-card">
+            <Rating/>
+            </div>
+
+        </div>
     )
 }
+
+export default MovieCard;
