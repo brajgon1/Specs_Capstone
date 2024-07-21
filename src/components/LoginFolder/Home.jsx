@@ -2,18 +2,20 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import supabase from "../../config/supabaseClient";
-import './Home.css' 
+import "./Home.css";
 
 const Home = () => {
   console.log(supabase);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [register, setRegister] = useState(true);
-  
+  const [movies, setMovies] = useState([]);
+  const [watchlist, setWatchlist] = useState([]);
+  const [favorite, setFavorite] = useState([]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -25,7 +27,7 @@ const Home = () => {
       .post(register ? "/register" : "/login", body)
       .then((res) => {
         console.log(res.data);
-        navigate("/")
+        navigate("/");
       })
       .catch((err) => {
         console.error(err);
