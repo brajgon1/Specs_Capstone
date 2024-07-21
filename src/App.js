@@ -5,8 +5,10 @@ import { useState, useEffect } from "react";
 import Header from "./components/Navigation/Header";
 import Home from "./components/LoginFolder/Home";
 import Profile from "./components/LoginFolder/Profile";
-import Rating from "./components/Rating/Rating";
+import TopFavorite from "./components/Favorites/TopFavorites";
+
 import { Route, Routes, Navigate } from "react-router-dom";
+import WatchList from "./components/Watchlist/Watchlist";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -37,9 +39,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/watchlist" element={<WatchList />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      {/* <Rating /> */}
     </div>
   );
 }

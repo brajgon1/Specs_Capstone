@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import "./TopFavorites.css"
 
 const TopFavorite = () => {
-
   return (
-    <div>
-      <div className="favorite-list"></div>
+    <div className="favorites-container">
+      <h2 className="favorites">Favorties</h2>
+      <div className="movie-cards-container"></div>
     </div>
   );
 };

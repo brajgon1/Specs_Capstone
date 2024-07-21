@@ -1,5 +1,6 @@
 // import MovieCard from "../Movies/MovieCard";
 import WatchList from "../Watchlist/Watchlist";
+import TopFavorite from "../Favorites/TopFavorites";
 import "./Profile.css";
 
 const Profile = () => {
@@ -13,8 +14,8 @@ const Profile = () => {
         />
         <h1 className="username">PlaceholderUsername</h1>
       </div>
-      <div><WatchList/></div>
-      {/* <div> this is where the favorites will go</div> */}
+      {/* <div><WatchList/></div> */}
+      <TopFavorite/>
     </div>
   );
 };
