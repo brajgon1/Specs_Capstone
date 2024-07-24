@@ -15,7 +15,7 @@ const register = async (req, res) => {
         .from('Users')
         .insert([{ username, email, password: hashedPassword }]);
         if (error) throw error;
-        resizeBy.status(201).send('User registered successfully')
+        res.status(201).send('User registered successfully')
     } catch (error) {
         console.error('Error registering: ', error);
         res.status(500).send('Error registering user');

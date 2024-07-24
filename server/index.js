@@ -13,4 +13,11 @@ app.use(express.json());
 app.post('/register', register);
 app.post('/login', login);
 
-app.listen(PORT, () => console.log(`listening on ${PORT}`));
+sequelize
+  .sync()
+  .then(() => {
+    app.listen(PORT, () =>
+      console.log(`database sync successful & server running on ${PORT}`)
+    );
+  })
+  .catch((err) => console.log(err));
