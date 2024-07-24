@@ -1,20 +1,21 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../store/authContext"; 
 import MovieCard from "../Movies/MovieCard";
 import supabase from "../../config/supabaseClient";
 import "./Home.css";
 
 const Home = () => {
-  console.log(supabase);
-
+  console.log(supabase)
+  const { state, dispatch } = useAuth();
+  const { authenticated } = state;
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [register, setRegister] = useState(true);
-  const [authenticated, setAuthenticated] = useState(false);
   const [movies, setMovies] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
   const [favorite, setFavorite] = useState([]);
@@ -25,9 +26,7 @@ const Home = () => {
       const response = await axios.get(
         `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
       );
-      const shuffleMovies = response.data.results
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 10);
+      const shuffleMovies = response.data.results.sort(() => 0.5 - Math.random()).slice(0, 10);
       setMovies(shuffleMovies);
     } catch (error) {
       console.error(error);
@@ -52,7 +51,7 @@ const Home = () => {
     if (favorite.length < 4) {
       setFavorite([...favorite, movie]);
     } else {
-      alert("No more than 4 favorites!");
+      alert("Maximum number of favorites reached!");
     }
   };
 
@@ -65,8 +64,8 @@ const Home = () => {
     axios
       .post(register ? "/register" : "/login", body)
       .then((res) => {
-        console.log(res.data);
-        setAuthenticated(true);
+        const { token, exp, userId, username } = res.data;
+        dispatch({ type: "LOGIN", payload: { token, exp, userId, username } });
         navigate("/");
       })
       .catch((err) => {
