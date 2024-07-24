@@ -115,3 +115,10 @@
 .login h2 {
     margin-bottom: 10px;
 }
+
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
