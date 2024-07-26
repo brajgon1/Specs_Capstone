@@ -2,23 +2,20 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { SECRET } = process.env;
 
-module.exports = {
-  isAuthenticated: (req, res, next) => {
-    const headerToken = req.get('Authorization');
+const isAuthenticated = (req, res, next) => {
+  const token = req.headers["authorization"];
 
-    if (!headerToken) {
-      console.log('ERROR IN auth middleware');
-      res.sendStatus(401);
-      return;
-    }
+  if (!token) {
+    return res.status(401).send("Access Denied: No Token Provided!");
+  }
 
-    try {
-      jwt.verify(headerToken, SECRET);
-    } catch (err) {
-      err.statusCode = 500;
-      throw err;
-    }
-
+  try {
+    const decoded = jwt.verify(token, SECRET);
+    req.user = decoded;
     next();
+  } catch (error) {
+    res.status(400).send("Invalid Token");
   }
 };
+
+module.exports = isAuthenticated;
