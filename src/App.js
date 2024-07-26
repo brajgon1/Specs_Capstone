@@ -1,12 +1,10 @@
-import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Header from "./components/Navigation/Header";
 import Home from "./components/LoginFolder/Home";
 import Profile from "./components/LoginFolder/Profile";
-import TopFavorite from "./components/Favorites/TopFavorites";
-
+// import TopFavorite from "./components/Favorites/TopFavorites"
 import { Route, Routes, Navigate } from "react-router-dom";
 import WatchList from "./components/Watchlist/Watchlist";
 

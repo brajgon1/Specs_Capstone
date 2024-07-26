@@ -3,7 +3,7 @@
 import TopFavorite from "../Favorites/TopFavorites";
 import { useAuth } from "../../store/authContext";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect } from 'react';
 import "./Profile.css";
 
 const Profile = () => {

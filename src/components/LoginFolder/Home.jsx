@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../store/authContext"; 
+import { useAuth } from "../../store/authContext";
 import MovieCard from "../Movies/MovieCard";
 import supabase from "../../config/supabaseClient";
 import "./Home.css";
