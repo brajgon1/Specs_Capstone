@@ -32,6 +32,7 @@ const register = async (req, res) => {
         if (existingUserError && existingUserError.code !== 'PGRST116') throw existingUserError;
 
         if (existingUser) {
+            console.log(existingUser)
             return res.status(400).send('User already exists');
         }
 
