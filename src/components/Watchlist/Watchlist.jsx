@@ -7,17 +7,32 @@ import "./WatchList.css";
 
 const WatchList = () => {
   const { state } = useAuth()
-  const { authenticated } = state
+  const { authenticated, userId } = state
   const navigate = useNavigate();
   const [watchlist, setWatchlist] = useState([]);
 
   useEffect(() => {
-    if (!authenticated) {
-      navigate('/login');
-    } else {
-     axios.get('/api/watchlist').then(response => setWatchlist(response.data));
+    const loadWatchlist = async () => {
+      if (authenticated) {
+        try {
+          const response = await axios.get(`/api/watchlist?userId=${userId}`);
+          setWatchlist(response.data);
+        } catch (error) {
+          console.error("Error fetching watchlist:", error);
+        }
+      } else {
+        navigate('/login');
+      }
+    };
+
+    loadWatchlist();
+  }, [authenticated, navigate, userId]);
+
+  useEffect(() => {
+    if (authenticated) {
+      localStorage.setItem(`watchlist_${userId}`, JSON.stringify(watchlist));
     }
-  }, [authenticated, navigate]);
+  }, [watchlist, authenticated, userId]);
 
   if (!authenticated) {
     return <div>Loading...</div>;
