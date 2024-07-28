@@ -33,7 +33,7 @@ const Home = () => {
         movies = movies.concat(response.data.results);
       }
 
-      const shuffleMovies = movies.sort(() => 0.5 - Math.random()).slice(0, 6);
+      const shuffleMovies = movies.sort(() => 0.5 - Math.random()).slice(0, 8);
       setMovies(shuffleMovies);
     } catch (error) {
       console.error(error);
