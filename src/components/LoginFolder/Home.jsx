@@ -24,7 +24,7 @@ const Home = () => {
     try {
       const apiKey = process.env.REACT_APP_API_KEY;
       let movies = [];
-      const totalPages = 100;
+      const totalPages = 200;
 
       for (let page = 1; page <= totalPages; page++) {
         const response = await axios.get(
