@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Rating from "../Rating/Rating";
 import "./MovieCard.css";
 
@@ -39,18 +38,21 @@ const MovieCard = ({ movie }) => {
           <span id="close" onClick={toggleModal}>
             X
           </span>
-          <img
+          <div className="modal-details">
+          {/* <img
             className="modal-content modalImg"
             src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
             alt="Movie Poster"
-          />
-          <div className="modal-details">
+          /> */}
             <h2>{movie.title}</h2>
+            <p>Release Date: {movie.release_date}</p>
             <p>
               Rating: <Rating rating={rating} onRatingChange={handleRating} />
             </p>
+            <p> Average Rating: {movie.vote_average}</p>
             <button onClick={addToWatchlist}>Add to Watchlist</button>
             <button onClick={addToFavorites}>Add to Favorites</button>
+            <p>Overview: {movie.overview}</p>
           </div>
         </div>
       )}
