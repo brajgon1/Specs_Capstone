@@ -7,7 +7,7 @@ import supabase from "../../config/supabaseClient";
 import "./Home.css";
 
 const Home = () => {
-  console.log(supabase)
+  console.log(supabase);
   const { state, dispatch } = useAuth();
   const { authenticated } = state;
   const navigate = useNavigate();
@@ -23,10 +23,17 @@ const Home = () => {
   const getRandomMovies = async () => {
     try {
       const apiKey = process.env.REACT_APP_API_KEY;
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
-      );
-      const shuffleMovies = response.data.results.sort(() => 0.5 - Math.random()).slice(0, 10);
+      let movies = [];
+      const totalPages = 100;
+
+      for (let page = 1; page <= totalPages; page++) {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`
+        );
+        movies = movies.concat(response.data.results);
+      }
+
+      const shuffleMovies = movies.sort(() => 0.5 - Math.random()).slice(0, 6);
       setMovies(shuffleMovies);
     } catch (error) {
       console.error(error);
