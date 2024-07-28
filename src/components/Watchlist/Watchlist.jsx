@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 import "./WatchList.css";
 
 const WatchList = () => {
-
-  const { authenticated } = useAuth();
+  const { state } = useAuth()
+  const { authenticated } = state
   const navigate = useNavigate();
   const [watchlist, setWatchlist] = useState([]);
 
@@ -24,19 +24,13 @@ const WatchList = () => {
   }
 
   return (
-    <div>
-      {!authenticated ? (
-        <div>Please log in to view your watchlist.</div>
-      ) : (
-        <div className="watch-list-container">
-          <h2 className="watchlist">Watchlist</h2>
-          <div className="movie-cards-container">
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-          </div>
-        </div>
-      )}
+    <div className="watch-list-container">
+      <h2 className="watchlist">Watchlist</h2>
+      <div className="movie-cards-container">
+        {watchlist.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
+      </div>
     </div>
   );
 };

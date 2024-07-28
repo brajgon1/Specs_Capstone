@@ -7,10 +7,12 @@ import { useEffect } from 'react';
 import "./Profile.css";
 
 const Profile = () => {
-  const { authenticated } = useAuth();
+  const { state } = useAuth()
+  const { authenticated } = state
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log('Authenticated: ', authenticated);
     if (!authenticated) {
       navigate('/login');
     }
@@ -21,23 +23,17 @@ const Profile = () => {
   }
 
   return (
-    <div>
-      {!authenticated ? (
-        <div>Please log in to view your profile.</div>
-      ) : (
-        <div className="profile-container">
-          <div className="profile-header">
-            <img
-              src="https://via.placeholder.com/150"
-              alt="Profile Pic"
-              className="pfp"
-            />
-            <h1 className="username">PlaceholderUsername</h1>
-          </div>
-          <div className="favorite-movie-list">Favorite Movies</div>
-          <TopFavorite />
-        </div>
-      )}
+    <div className="profile-container">
+      <div className="profile-header">
+        <img
+          src="https://via.placeholder.com/150"
+          alt="Profile Pic"
+          className="pfp"
+        />
+        <h1 className="username">PlaceholderUsername</h1>
+      </div>
+      <div className="favorite-movie-list">Favorite Movies</div>
+      <TopFavorite />
     </div>
   );
 };

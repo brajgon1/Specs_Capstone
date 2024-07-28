@@ -16,7 +16,7 @@ const Header = () => {
       <nav className="header-nav">
         <ul className="main-nav">
           <li>
-            <NavLink style={styleActiveLink} to="/home" >
+            <NavLink style={styleActiveLink} to="/" >
               Home
             </NavLink>
           </li>

@@ -73,82 +73,82 @@ const Home = () => {
       });
   };
 
+  if (!authenticated) {
+    return (
+      <div>
+        {register ? (
+          <div className="register">
+            <h1>Register</h1>
+            <form onSubmit={submitHandler}>
+              <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <button type="submit">Register</button>
+            </form>
+            <p>
+              Already have an account?{" "}
+              <button onClick={() => setRegister(false)}>Login</button>
+            </p>
+          </div>
+        ) : (
+          <div className="login">
+            <h1>Login</h1>
+            <form onSubmit={submitHandler}>
+              <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <button type="submit">Login</button>
+            </form>
+            <p>
+              Don't have an account?{" "}
+              <button onClick={() => setRegister(true)}>Register</button>
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
-    <div>
-      {!authenticated ? (
-        <div>
-          {register ? (
-            <div className="register">
-              <h1>Register</h1>
-              <form onSubmit={submitHandler}>
-                <input
-                  type="text"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-                <button type="submit">Register</button>
-              </form>
-              <p>
-                Already have an account?{" "}
-                <button onClick={() => setRegister(false)}>Login</button>
-              </p>
-            </div>
-          ) : (
-            <div className="login">
-              <h1>Login</h1>
-              <form onSubmit={submitHandler}>
-                <input
-                  type="text"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-                <button type="submit">Login</button>
-              </form>
-              <p>
-                Don't have an account?{" "}
-                <button onClick={() => setRegister(true)}>Register</button>
-              </p>
-            </div>
-          )}
-        </div>
-      ) : (
-        <div className="movie-list">
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              movie={movie}
-              onAddToWatchlist={() => addToWatchlist(movie)}
-              onRemoveFromWatchlist={() => removeFromWatchlist(movie)}
-              onAddToFavorites={() => addToFavorites(movie)}
-            />
-          ))}
-        </div>
-      )}
+    <div className="movie-list">
+      {movies.map((movie) => (
+        <MovieCard
+          key={movie.id}
+          movie={movie}
+          onAddToWatchlist={() => addToWatchlist(movie)}
+          onRemoveFromWatchlist={() => removeFromWatchlist(movie)}
+          onAddToFavorites={() => addToFavorites(movie)}
+        />
+      ))}
     </div>
   );
 };
