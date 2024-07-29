@@ -22,32 +22,29 @@ const Home = () => {
   const [favorite, setFavorite] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  const getRandomMovies = async () => {
+  const getRandomMovies = async (page) => {
     try {
+      setLoading(true);
       const apiKey = process.env.REACT_APP_API_KEY;
-      let movies = [];
-      const totalPages = 200;
-
-      for (let page = 1; page <= totalPages; page++) {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`
-        );
-        movies = movies.concat(response.data.results);
-      }
-
-      const shuffleMovies = movies.sort(() => 0.5 - Math.random()).slice(0, 8);
-      setMovies(shuffleMovies);
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`
+      );
+      setMovies(response.data.results);
+      setTotalPages(response.data.total_pages);
+      setLoading(false);
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     if (authenticated) {
-      getRandomMovies();
+      getRandomMovies(currentPage);
     }
-  }, [authenticated]);
+  }, [authenticated, currentPage]);
 
   const addToWatchlist = (movie) => {
     setWatchlist([...watchlist, movie]);
@@ -58,7 +55,7 @@ const Home = () => {
   };
 
   const addToFavorites = (movie) => {
-    if (favorite.length < 4) {
+    if (favorite.length < 6) {
       setFavorite([...favorite, movie]);
     } else {
       alert("Maximum number of favorites reached!");
@@ -150,15 +147,26 @@ const Home = () => {
 
   return (
     <div className="movie-list">
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          movie={movie}
-          onAddToWatchlist={() => addToWatchlist(movie)}
-          onRemoveFromWatchlist={() => removeFromWatchlist(movie)}
-          onAddToFavorites={() => addToFavorites(movie)}
-        />
-      ))}
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          {movies.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              onAddToWatchlist={() => addToWatchlist(movie)}
+              onRemoveFromWatchlist={() => removeFromWatchlist(movie)}
+              onAddToFavorites={() => addToFavorites(movie)}
+            />
+          ))}
+          <Slider
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
+        </>
+      )}
     </div>
   );
 };

@@ -1,0 +1,32 @@
+.slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.slider span {
+    margin: 0 8px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.slider span.active {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+
+.slider span.disabled {
+    pointer-events: none;
+    color: gray;
+}
