@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/authContext";
 import MovieCard from "../Movies/MovieCard";
+import Slider from "../Slider/Slider";
 import supabase from "../../config/supabaseClient";
 import "./Home.css";
 
@@ -19,6 +20,8 @@ const Home = () => {
   const [movies, setMovies] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
   const [favorite, setFavorite] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   const getRandomMovies = async () => {
     try {
