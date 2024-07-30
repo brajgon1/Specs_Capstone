@@ -1,5 +1,4 @@
 import MovieCard from "../Movies/MovieCard";
-import axios from "axios";
 import { useEffect, useState } from 'react'
 import { useAuth } from "../../store/authContext";
 import { useNavigate } from "react-router-dom";
@@ -12,21 +11,13 @@ const WatchList = () => {
   const [watchlist, setWatchlist] = useState([]);
 
   useEffect(() => {
-    const loadWatchlist = async () => {
-      if (authenticated) {
-        try {
-          const response = await axios.get(`/api/watchlist?userId=${userId}`);
-          setWatchlist(response.data);
-        } catch (error) {
-          console.error("Error fetching watchlist:", error);
-        }
-      } else {
-        navigate('/login');
-      }
-    };
-
-    loadWatchlist();
-  }, [authenticated, navigate, userId]);
+    if (!authenticated) {
+      navigate("/login");
+    } else {
+      const storedWatchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+      setWatchlist(storedWatchlist);
+    }
+  }, [authenticated, navigate]);
 
   useEffect(() => {
     if (authenticated) {

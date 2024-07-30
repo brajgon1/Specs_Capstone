@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import './Rating.css';
 
-export default function Rating({ noOfStars = 5 }) {
+export default function Rating({ noOfStars = 10 }) {
     const [rating, setRating] = useState(0);
     const [hovered, setHovered] = useState(0);
 

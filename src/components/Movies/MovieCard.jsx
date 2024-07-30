@@ -5,21 +5,27 @@ import "./MovieCard.css";
 const MovieCard = ({ movie }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [rating, setRating] = useState(movie.vote_average);
-  const [watchlist, setWatchlist] = useState([]);
-  const [favorites, setFavorites] = useState([]);
 
   const toggleModal = () => {
     setModalOpen(!modalOpen);
   };
 
   const addToWatchlist = () => {
-    setWatchlist([...watchlist, movie]);
-    alert(`${movie.title} added to watchlist!`);
+    const currentWatchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+    if (!currentWatchlist.some((item) => item.id === movie.id)) {
+      const updatedWatchlist = [...currentWatchlist, movie];
+      localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
+      alert(`${movie.title} added to watchlist!`);
+    } else {
+      alert(`${movie.title} is already in the watchlist!`);
+    }
   };
 
   const addToFavorites = () => {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     if (favorites.length < 4) {
-      setFavorites([...favorites, movie]);
+      const updatedFavorites = [...favorites, movie];
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
       alert(`${movie.title} added to favorites!`);
     } else {
       alert("Maximum number of favorites reached!");
