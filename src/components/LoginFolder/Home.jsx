@@ -146,27 +146,23 @@ const Home = () => {
   }
 
   return (
-    <div className="movie-list">
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              movie={movie}
-              onAddToWatchlist={() => addToWatchlist(movie)}
-              onRemoveFromWatchlist={() => removeFromWatchlist(movie)}
-              onAddToFavorites={() => addToFavorites(movie)}
-            />
-          ))}
-          <Slider
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={(page) => setCurrentPage(page)}
+    <div className="home-container">
+      <div className="movie-list">
+        {movies.map((movie) => (
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            onAddToWatchlist={() => addToWatchlist(movie)}
+            onRemoveFromWatchlist={() => removeFromWatchlist(movie)}
+            onAddToFavorites={() => addToFavorites(movie)}
           />
-        </>
-      )}
+        ))}
+      </div>
+      <Slider
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
     </div>
   );
 };

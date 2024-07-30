@@ -124,6 +124,18 @@
     padding-bottom: 100px;
   }
 
-  .movie-card {
-    margin: 10px;
+  .movie-list {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding-bottom: 100px;
+  }
+
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
   }
