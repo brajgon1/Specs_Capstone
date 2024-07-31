@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Rating from "../Rating/Rating";
 import "./MovieCard.css";
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, inWatchlist, onRemoveFromWatchlist }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [rating, setRating] = useState(movie.vote_average);
 
@@ -11,7 +11,8 @@ const MovieCard = ({ movie }) => {
   };
 
   const addToWatchlist = () => {
-    const currentWatchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+    const currentWatchlist =
+      JSON.parse(localStorage.getItem("watchlist")) || [];
     if (!currentWatchlist.some((item) => item.id === movie.id)) {
       const updatedWatchlist = [...currentWatchlist, movie];
       localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
@@ -21,11 +22,23 @@ const MovieCard = ({ movie }) => {
     }
   };
 
+  const removeFromWatchlist = () => {
+    onRemoveFromWatchlist(movie.id);
+    const currentWatchlist =
+      JSON.parse(localStorage.getItem("watchlist")) || [];
+    const updateWatchlist = currentWatchlist.filter(
+      (item) => item.id === movie.id
+    );
+    localStorage.setItem("watchlist", JSON.stringify(updateWatchlist));
+    alert(`${movie.title} removed from watchlist!`);
+    toggleModal();
+  };
+
   const addToFavorites = () => {
-    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     if (favorites.length < 4) {
       const updatedFavorites = [...favorites, movie];
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
       alert(`${movie.title} added to favorites!`);
     } else {
       alert("Maximum number of favorites reached!");
@@ -52,7 +65,13 @@ const MovieCard = ({ movie }) => {
                 Rating: <Rating rating={rating} onRatingChange={handleRating} />
               </p>
               <p>Average Rating: {movie.vote_average}</p>
-              <button onClick={addToWatchlist}>Add to Watchlist</button>
+              {inWatchlist ? (
+                <button onClick={removeFromWatchlist}>
+                  Delete from Watchlist
+                </button>
+              ) : (
+                <button onClick={addToWatchlist}>Add to Watchlist</button>
+              )}
               <button onClick={addToFavorites}>Add to Favorites</button>
               <p>Overview: {movie.overview}</p>
             </div>
