@@ -1,7 +1,9 @@
 import MovieCard from "../Movies/MovieCard";
+// import axios from "axios";
 import { useEffect, useState } from 'react'
 import { useAuth } from "../../store/authContext";
 import { useNavigate } from "react-router-dom";
+// import supabase from "../../config/supabaseClient";
 import "./WatchList.css";
 
 const WatchList = () => {
