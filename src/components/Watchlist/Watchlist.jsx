@@ -4,9 +4,11 @@ import { useAuth } from "../../store/authContext";
 import { useNavigate } from "react-router-dom";
 import "./WatchList.css";
 
+// NEED TO WORK ON UPLOADING THE WATCHLIST TO THE DATABASE & USING LOCAL STORAGE
+
 const WatchList = () => {
   const { state } = useAuth();
-  const { authenticated, userId } = state;
+  const { authenticated } = state;
   const navigate = useNavigate();
   const [watchlist, setWatchlist] = useState([]);
 
@@ -25,6 +27,11 @@ const WatchList = () => {
     }
   }, [watchlist, authenticated]);
 
+  const removeFromWatchlist = (movieId) => {
+    const updatedWatchlist = watchlist.filter(movie => movie.id !== movieId);
+    setWatchlist(updatedWatchlist);
+  };
+
   if (!authenticated) {
     return <div>Loading...</div>;
   }
@@ -34,7 +41,14 @@ const WatchList = () => {
       <h2 className="watchlist">Watchlist</h2>
       <div className="movie-cards-container">
         {watchlist.length > 0 ? (
-          watchlist.map((movie) => <MovieCard key={movie.id} movie={movie} />)
+          watchlist.map((movie) => (
+            <MovieCard 
+              key={movie.id} 
+              movie={movie} 
+              inWatchlist={true} 
+              onRemoveFromWatchlist={removeFromWatchlist} 
+            />
+          ))
         ) : (
           <p>Your watchlist is empty.</p>
         )}
