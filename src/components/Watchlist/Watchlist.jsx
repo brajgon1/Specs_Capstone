@@ -1,7 +1,7 @@
-import MovieCard from "../Movies/MovieCard";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../store/authContext";
 import { useNavigate } from "react-router-dom";
+import MovieCard from "../Movies/MovieCard";
 import "./WatchList.css";
 
 // NEED TO WORK ON UPLOADING THE WATCHLIST TO THE DATABASE & USING LOCAL STORAGE
