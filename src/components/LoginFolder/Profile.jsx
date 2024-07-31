@@ -8,7 +8,7 @@ import "./Profile.css";
 
 const Profile = () => {
   const { state } = useAuth()
-  const { authenticated } = state
+  const { authenticated, username } = state
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Profile = () => {
           alt="Profile Pic"
           className="pfp"
         />
-        <h1 className="username">PlaceholderUsername</h1>
+        <h1 className="username">{username}</h1>
       </div>
       <div className="favorite-movie-list">Favorite Movies</div>
       <TopFavorite />
