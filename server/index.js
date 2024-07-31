@@ -23,7 +23,7 @@ app.post("/login", login);
 app.get("/users", isAuthenticated, getUsers);
 app.get("/watchlist", getWatchlist);
 app.post("/watchlist", saveWatchlist);
-app.delete("/watchlist", deleteFromWatchlist);
+// app.delete("/watchlist", deleteFromWatchlist);
 
 // server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

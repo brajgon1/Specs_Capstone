@@ -1,66 +1,93 @@
-const { createClient } = require("@supabase/supabase-js");
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
-const supabaseKey = process.env.REACT_APP_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+import MovieCard from "../Movies/MovieCard";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../store/authContext";
+import { useNavigate } from "react-router-dom";
+import supabase from "../../config/supabaseClient";
+import "./WatchList.css";
 
-const getWatchlist = async (req, res) => {
-    const userId = req.query.userId;
+const WatchList = () => {
+  const { state } = useAuth();
+  const { authenticated, userId } = state;
+  const navigate = useNavigate();
+  const [watchlist, setWatchlist] = useState([]);
 
-    try {
-        const { data, error } = await supabase
-           .from("watchlist")
-           .select("*")
-           .eq("user_id", userId);
+  useEffect(() => {
+    const loadWatchlist = async () => {
+      if (authenticated) {
+        try {
+          const { data, error } = await supabase
+            .from("watchlist")
+            .select("movie_id")
+            .eq("user_id", userId);
 
-           if (error) {
-            return res.status(500).json({ error: "Error getting watchlist", details: error.message });
-          }
+          if (error) throw error;
 
-          res.status(200).json(data);
-    } catch (err) {
-        res.status(500).json({ error: "Error getting watchlist", details: error.message });
-    }
-}
+          const moviePromises = data.map((item) =>
+            axios.get(`/api/movies/${item.movie_id}`)
+          );
+          const movies = await Promise.all(moviePromises);
 
-const saveWatchlist = async (req, res) => {
-    const { userId, movieId } = req.body;
-  
-    try {
-      const { data, error } = await supabase
-        .from("watchlists")
-        .insert([{ user_id: userId, movie_id: movieId}], {returning: "minimal"})
-  
-      if (error) {
-        return res.status(500).json({ error: "Error saving watchlist", details: error.message });
+          setWatchlist(movies.map((response) => response.data));
+          localStorage.setItem(
+            `watchlist_${userId}`,
+            JSON.stringify(movies.map((response) => response.data))
+          );
+        } catch (error) {
+          console.error("Error fetching watchlist:", error);
+        }
+      } else {
+        navigate("/login");
       }
-  
-      res.status(200).json({ message: "Watchlist saved successfully" });
+    };
+
+    const localWatchlist = JSON.parse(
+      localStorage.getItem(`watchlist_${userId}`)
+    );
+    if (localWatchlist) {
+      setWatchlist(localWatchlist);
+    } else {
+      loadWatchlist();
+    }
+  }, [authenticated, navigate, userId]);
+
+  const removeFromWatchlist = async (movieId) => {
+    try {
+      const { error } = await supabase
+      .from('watchlist')
+      .delete()
+      .eq('user_id', userId)
+      .eq('movie_id', movieId)
+
+      if (error) throw error;
+
+      const updatedWatchlist = watchlist.filter(movie => movie.id !== movieId)
+      setWatchlist(updatedWatchlist);
+      localStorage.setItem(`watchlist_${userId}`, JSON.stringify(updatedWatchlist))
     } catch (error) {
-      res.status(500).json({ error: "Error saving watchlist", details: error.message });
+      console.error("Error removing from watchlist:", error);
     }
   };
 
-  const deleteFromWatchlist = async (req, res) => {
-    const { userId, movieId } = req.body;
-    try {
-      const { error } = await supabase
-        .from("watchlists")
-       .delete()
-       .eq("user_id", userId)
-       .eq("movie_id", movieId);
-
-       if (error) {
-        return res.status(500).json({ error: "Error deleting from watchlist", details: error.message });
-       }
-
-       res.status(200).json({ message: "Movie removed from watchlist successfully" });
-    } catch (error) {
-      res.status(500).json({ error: "Error deleting from watchlist", details: error.message });
-    }
+  if (!authenticated) {
+    return <div>Loading...</div>;
   }
 
-  module.exports = {
-    getWatchlist,
-    saveWatchlist,
-    deleteFromWatchlist
-  }
+  return (
+    <div className="watch-list-container">
+      <h2 className="watchlist">Watchlist</h2>
+      <div className="movie-cards-container">
+        {watchlist.map((movie) => (
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            inWatchlist
+            onRemoveFromWatchlist={removeFromWatchlist}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default WatchList;
