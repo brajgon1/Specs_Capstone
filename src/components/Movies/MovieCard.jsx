@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Rating from "../Rating/Rating";
 import "./MovieCard.css";
 
@@ -27,7 +27,7 @@ const MovieCard = ({ movie, inWatchlist, onRemoveFromWatchlist }) => {
     const currentWatchlist =
       JSON.parse(localStorage.getItem("watchlist")) || [];
     const updateWatchlist = currentWatchlist.filter(
-      (item) => item.id === movie.id
+      (item) => item.id !== movie.id
     );
     localStorage.setItem("watchlist", JSON.stringify(updateWatchlist));
     alert(`${movie.title} removed from watchlist!`);
@@ -83,7 +83,7 @@ const MovieCard = ({ movie, inWatchlist, onRemoveFromWatchlist }) => {
           src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
           alt="Movie Poster"
         />
-        <h3>{movie.title}</h3>
+        {/* <h3>{movie.title}</h3> */}
       </div>
     </div>
   );

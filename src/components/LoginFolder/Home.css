@@ -122,20 +122,14 @@
     gap: 20px;
     justify-content: center;
     padding-bottom: 100px;
-  }
-
-  .movie-list {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    padding-bottom: 100px;
+    padding-top: 80px;
+    width: 900px;
   }
 
   .home-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     min-height: 100vh;
     position: relative;
   }

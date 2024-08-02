@@ -23,17 +23,22 @@
   
   .header-nav .main-nav a {
     text-decoration: none;
-    color: lightblue
+    text-transform: uppercase;
+    color: #99AABB;
   }
   
   .header-nav .main-nav a:hover {
-    color: whitesmoke;
+    color: #C4CBCA;
   }
 
   .name-of-app {
-    color: white;
+    color: #DDF0ED;
     font-size: 24px;
     font-weight: bold;
     margin-right: 10px;
     margin-left: 10px;
+  }
+
+  .header .app-title {
+    font-family: "Montagu Slab", serif; 
   }

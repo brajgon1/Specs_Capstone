@@ -32,10 +32,8 @@ const saveWatchlist = async (req, res) => {
 
   try {
     const { data, error } = await supabase
-      .from("watchlists")
-      .insert([{ user_id: userId, movie_id: movieId }], {
-        returning: "minimal",
-      });
+      .from("watchlist")
+      .insert([{ user_id: userId, movie_id: movieId }]);
 
     if (error) {
       return res
@@ -56,7 +54,7 @@ const deleteFromWatchlist = async (req, res) => {
 
   try {
     const { error } = await supabase
-      .from("watchlists")
+      .from("watchlist")
       .delete()
       .eq("user_id", userId)
       .eq("movie_id", movieId);

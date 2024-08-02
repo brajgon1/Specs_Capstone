@@ -38,7 +38,6 @@ const WatchList = () => {
 
   return (
     <div className="watch-list-container">
-      <h2 className="watchlist">Watchlist</h2>
       <div className="movie-cards-container">
         {watchlist.length > 0 ? (
           watchlist.map((movie) => (
@@ -50,7 +49,7 @@ const WatchList = () => {
             />
           ))
         ) : (
-          <p>Your watchlist is empty.</p>
+          <p className="watchlist-p">Your watchlist is empty</p>
         )}
       </div>
     </div>

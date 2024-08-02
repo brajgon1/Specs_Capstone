@@ -2,10 +2,11 @@
     box-shadow: 2px 2px 5px #444241;
     border-radius: 20px;
     margin-top: 50px;
+    margin-bottom: 50px;
     margin: auto;
     padding: 15px;
-    height: 400px;
-    width: 300px;
+    height: 310px;
+    width: 220px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -13,6 +14,8 @@
     background-color: white;
     box-sizing: border-box;
     cursor: pointer;
+    border-color: #def;
+    max-width: 200px;
   }
   
   .movie-card img {

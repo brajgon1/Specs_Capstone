@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="name-of-app">
-        <h2>CineHub</h2>
+        <h2 className="app-title">CineHub</h2>
       </div>
       <nav className="header-nav">
         <ul className="main-nav">
