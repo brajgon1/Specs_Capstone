@@ -83,11 +83,6 @@ const Home = () => {
     }
   };
 
-  const removeFromFavorites = (movieId) => {
-    const updatedFavorites = favorite.filter((movie) => movie.id !== movieId);
-    setFavorite(updatedFavorites);
-    localStorage.setItem("favorite", JSON.stringify(updatedFavorites));
-  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -174,18 +169,15 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <Header onSearch={searchMovies} />
+      <Header onSearch={searchMovies}/>
       <div className="movie-list">
         {movies.map((movie) => (
           <MovieCard
             key={movie.id}
             movie={movie}
-            inWatchlist={watchlist.some((m) => m.id === movie.id)}
-            inFavorites={favorite.some((m) => m.id === movie.id)}
             onAddToWatchlist={() => addToWatchlist(movie)}
             onRemoveFromWatchlist={() => removeFromWatchlist(movie)}
             onAddToFavorites={() => addToFavorites(movie)}
-            onRemoveFromFavorites={() => removeFromFavorites(movie.id)}
           />
         ))}
       </div>

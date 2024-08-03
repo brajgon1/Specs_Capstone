@@ -2,7 +2,7 @@ import { useState } from "react";
 import Rating from "../Rating/Rating";
 import "./MovieCard.css";
 
-const MovieCard = ({ movie, inWatchlist, onRemoveFromWatchlist, onAddToFavorites, inFavorites, onRemoveFromFavorites }) => {
+const MovieCard = ({ movie, inWatchlist, onRemoveFromWatchlist }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [rating, setRating] = useState(movie.vote_average);
 
@@ -35,7 +35,6 @@ const MovieCard = ({ movie, inWatchlist, onRemoveFromWatchlist, onAddToFavorites
   };
 
   const addToFavorites = () => {
-    onAddToFavorites(movie.id);
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     if (favorites.length < 4) {
       const updatedFavorites = [...favorites, movie];
@@ -45,15 +44,6 @@ const MovieCard = ({ movie, inWatchlist, onRemoveFromWatchlist, onAddToFavorites
       alert("Maximum number of favorites reached!");
     }
   };
-
-  const removeFromFavorites = () => {
-    onRemoveFromFavorites(movie.id);
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    const updatedFavorites = favorites.filter((fav) => fav.id!== movie.id);
-    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-    alert(`${movie.title} removed from favorites!`);
-    toggleModal();
-  }
 
   // DO MORE WORK ON RATING WHEN I CAN - NOT TOP PRIORITY - JUST REALIZED IT DOESN'T DO ANYTHING
   const handleRating = (newRating) => {
@@ -77,15 +67,13 @@ const MovieCard = ({ movie, inWatchlist, onRemoveFromWatchlist, onAddToFavorites
               </p>
               <p>Average Rating: {movie.vote_average}</p>
               {inWatchlist ? (
-                <button onClick={removeFromWatchlist}>Delete from Watchlist</button>
+                <button onClick={removeFromWatchlist}>
+                  Delete from Watchlist
+                </button>
               ) : (
                 <button onClick={addToWatchlist}>Add to Watchlist</button>
               )}
-              {inFavorites ? (
-                <button onClick={removeFromFavorites}>Remove from Favorites</button>
-              ) : (
-                <button onClick={addToFavorites}>Add to Favorites</button>
-              )}
+              <button onClick={addToFavorites}>Add to Favorites</button>
               <p>Overview: {movie.overview}</p>
             </div>
           </div>
