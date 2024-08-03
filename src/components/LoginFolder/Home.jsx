@@ -23,6 +23,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
   const getRandomMovies = async (page) => {
     try {
@@ -55,14 +56,30 @@ const Home = () => {
   };
 
   const addToFavorites = (movie) => {
-    console.log('Adding favorites:', movie);
+    console.log("Adding favorites:", movie);
     if (favorite.length < 4) {
       const favoriteList = [...favorite, movie];
-      setFavorite(favoriteList)
-      localStorage.setItem('favorite', JSON.stringify(favoriteList));
+      setFavorite(favoriteList);
+      localStorage.setItem("favorite", JSON.stringify(favoriteList));
       console.log("favorites Stored:", favoriteList);
     } else {
       alert("Maximum number of favorites reached!");
+    }
+  };
+
+  const searchMovies = async () => {
+    try {
+      setLoading(true);
+      const apiKey = process.env.REACT_APP_API_KEY;
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${search}`
+      );
+      setMovies(response.data.results);
+      setTotalPages(response.data.total_pages);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
     }
   };
 
@@ -151,6 +168,15 @@ const Home = () => {
 
   return (
     <div className="home-container">
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search for movies..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button onClick={searchMovies}>Search</button>
+      </div>
       <div className="movie-list">
         {movies.map((movie) => (
           <MovieCard

@@ -4,7 +4,7 @@ import "./Header.css";
 const Header = () => {
   const styleActiveLink = ({ isActive }) => {
     return {
-      color: isActive ? "#f57145" : "",
+      color: isActive ? "#f5f5f5" : "",
     };
   };
 

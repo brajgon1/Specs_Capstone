@@ -1,20 +1,18 @@
 .movie-card {
-    box-shadow: 2px 2px 5px #444241;
+    box-shadow: 2px 2px 5px #2c2b2b;
     border-radius: 20px;
     margin-top: 50px;
     margin-bottom: 50px;
     margin: auto;
-    padding: 15px;
-    height: 310px;
+    white-space: none;
+    height: 300px;
     width: 220px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
     box-sizing: border-box;
     cursor: pointer;
-    border-color: #def;
     max-width: 200px;
   }
   
@@ -22,6 +20,11 @@
     max-width: 100%;
     height: auto;
     border-radius: 10px;
+  }
+
+  .movie-card:hover {
+    cursor: pointer;
+    transform: scale(1.1, 1.1);
   }
   
   .rating {
