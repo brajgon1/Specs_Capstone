@@ -2,7 +2,7 @@ import { useState } from "react";
 import Rating from "../Rating/Rating";
 import "./MovieCard.css";
 
-const MovieCard = ({ movie, inWatchlist, onRemoveFromWatchlist, onAddToFavorites }) => {
+const MovieCard = ({ movie, inWatchlist, onRemoveFromWatchlist }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [rating, setRating] = useState(movie.vote_average);
 
