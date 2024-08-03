@@ -1,20 +1,18 @@
-// import MovieCard from "../Movies/MovieCard";
-// import WatchList from "../Watchlist/Watchlist";
 import TopFavorite from "../Favorites/TopFavorites";
 import { useAuth } from "../../store/authContext";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import "./Profile.css";
 
 const Profile = () => {
-  const { state } = useAuth()
-  const { authenticated, username } = state
+  const { state } = useAuth();
+  const { authenticated, username } = state;
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('Authenticated: ', authenticated);
+    console.log("Authenticated: ", authenticated);
     if (!authenticated) {
-      navigate('/login');
+      navigate("/login");
     }
   }, [authenticated, navigate]);
 
@@ -32,10 +30,15 @@ const Profile = () => {
         />
         <h1 className="username">{username}</h1>
       </div>
-      <div className="favorite-movie-list">Favorite Movies</div>
-      <TopFavorite />
+      <div className="favorite-movie-list">
+        <TopFavorite />
+      </div>
     </div>
   );
 };
 
 export default Profile;
+
+
+// THE FAVORITES ARE BEING STORED IN LOCAL STORAGE - VIA THE APPLICATION TAB - BUT THEY ARE NOT
+// DISPLAYING IN THE PROFILE PAGE

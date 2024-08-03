@@ -2,7 +2,7 @@ import { useState } from "react";
 import Rating from "../Rating/Rating";
 import "./MovieCard.css";
 
-const MovieCard = ({ movie, inWatchlist, onRemoveFromWatchlist }) => {
+const MovieCard = ({ movie, inWatchlist, onRemoveFromWatchlist, onAddToFavorites }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [rating, setRating] = useState(movie.vote_average);
 
@@ -45,6 +45,7 @@ const MovieCard = ({ movie, inWatchlist, onRemoveFromWatchlist }) => {
     }
   };
 
+  // DO MORE WORK ON RATING WHEN I CAN - NOT TOP PRIORITY - JUST REALIZED IT DOESN'T DO ANYTHING
   const handleRating = (newRating) => {
     setRating(newRating);
     alert(`${movie.title} rated ${newRating} stars!`);

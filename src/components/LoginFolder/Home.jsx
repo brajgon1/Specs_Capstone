@@ -55,8 +55,12 @@ const Home = () => {
   };
 
   const addToFavorites = (movie) => {
-    if (favorite.length < 6) {
-      setFavorite([...favorite, movie]);
+    console.log('Adding favorites:', movie);
+    if (favorite.length < 4) {
+      const favoriteList = [...favorite, movie];
+      setFavorite(favoriteList)
+      localStorage.setItem('favorite', JSON.stringify(favoriteList));
+      console.log("favorites Stored:", favoriteList);
     } else {
       alert("Maximum number of favorites reached!");
     }

@@ -24,17 +24,6 @@
     border-radius: 10px;
   }
   
-  .movie-card h3 {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-  }
-  
-  .movie-card p {
-    margin: 5px 0;
-    text-align: center;
-  }
-  
   .rating {
     display: flex;
     justify-content: center;
