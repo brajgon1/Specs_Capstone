@@ -23,7 +23,7 @@ const Profile = () => {
 
   return (
     <div>
-      <Header />
+        <Header />
       <div className="profile-container">
         <div className="profile-header">
           <img
