@@ -25,6 +25,7 @@
   .movie-card:hover {
     cursor: pointer;
     transform: scale(1.1, 1.1);
+    border-color: solid white;
   }
   
   .rating {

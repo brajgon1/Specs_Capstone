@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/authContext";
 import MovieCard from "../Movies/MovieCard";
 import Slider from "../Slider/Slider";
+import Header from "../Navigation/Header";
 import supabase from "../../config/supabaseClient";
 import "./Home.css";
 
@@ -23,7 +24,6 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
 
   const getRandomMovies = async (page) => {
     try {
@@ -31,6 +31,22 @@ const Home = () => {
       const apiKey = process.env.REACT_APP_API_KEY;
       const response = await axios.get(
         `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`
+      );
+      setMovies(response.data.results);
+      setTotalPages(response.data.total_pages);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
+
+  const searchMovies = async (query) => {
+    try {
+      setLoading(true);
+      const apiKey = process.env.REACT_APP_API_KEY;
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`
       );
       setMovies(response.data.results);
       setTotalPages(response.data.total_pages);
@@ -67,21 +83,6 @@ const Home = () => {
     }
   };
 
-  const searchMovies = async () => {
-    try {
-      setLoading(true);
-      const apiKey = process.env.REACT_APP_API_KEY;
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${search}`
-      );
-      setMovies(response.data.results);
-      setTotalPages(response.data.total_pages);
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-      setLoading(false);
-    }
-  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -168,15 +169,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Search for movies..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button onClick={searchMovies}>Search</button>
-      </div>
+      <Header onSearch={searchMovies}/>
       <div className="movie-list">
         {movies.map((movie) => (
           <MovieCard
