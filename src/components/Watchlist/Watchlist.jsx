@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../store/authContext";
 import { useNavigate } from "react-router-dom";
 import MovieCard from "../Movies/MovieCard";
+import Header from "../Navigation/Header";
 import "./WatchList.css";
 
 // NEED TO WORK ON UPLOADING THE WATCHLIST TO THE DATABASE & USING LOCAL STORAGE
@@ -16,7 +17,8 @@ const WatchList = () => {
     if (!authenticated) {
       navigate("/login");
     } else {
-      const storedWatchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+      const storedWatchlist =
+        JSON.parse(localStorage.getItem("watchlist")) || [];
       setWatchlist(storedWatchlist);
     }
   }, [authenticated, navigate]);
@@ -28,7 +30,7 @@ const WatchList = () => {
   }, [watchlist, authenticated]);
 
   const removeFromWatchlist = (movieId) => {
-    const updatedWatchlist = watchlist.filter(movie => movie.id !== movieId);
+    const updatedWatchlist = watchlist.filter((movie) => movie.id !== movieId);
     setWatchlist(updatedWatchlist);
   };
 
@@ -37,20 +39,23 @@ const WatchList = () => {
   }
 
   return (
-    <div className="watch-list-container">
-      <div className="movie-cards-container">
-        {watchlist.length > 0 ? (
-          watchlist.map((movie) => (
-            <MovieCard 
-              key={movie.id} 
-              movie={movie} 
-              inWatchlist={true} 
-              onRemoveFromWatchlist={removeFromWatchlist} 
-            />
-          ))
-        ) : (
-          <p className="watchlist-p">Your watchlist is empty</p>
-        )}
+    <div>
+      <Header />
+      <div className="watch-list-container">
+        <div className="movie-cards-container">
+          {watchlist.length > 0 ? (
+            watchlist.map((movie) => (
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                inWatchlist={true}
+                onRemoveFromWatchlist={removeFromWatchlist}
+              />
+            ))
+          ) : (
+            <p className="watchlist-p">Your watchlist is empty</p>
+          )}
+        </div>
       </div>
     </div>
   );
