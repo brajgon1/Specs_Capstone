@@ -17,7 +17,9 @@ const Header = ({ onSearch }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    onSearch(search);
+    if (onSearch) {
+      onSearch(search);
+    }
   };
 
   return (

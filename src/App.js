@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.css"
 import Home from "./components/LoginFolder/Home";
 import Profile from "./components/LoginFolder/Profile";
 import WatchList from "./components/Watchlist/Watchlist";
