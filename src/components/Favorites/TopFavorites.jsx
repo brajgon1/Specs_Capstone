@@ -11,7 +11,7 @@ const TopFavorite = () => {
   }, []);
 
   // const removeFromFavorites = (movie) => {
-  //   const updatedFavorites = favorite.filter((fav) = fav.id !== movie.id);
+  //   const updatedFavorites = favorite.filter((favorite) = favorite.id !== movie.id);
   //   setFavorite(updatedFavorites);
   //   localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   // };

@@ -18,5 +18,6 @@
 }
 
 .watchlist-p {
-  margin-left: 500px;
+  display: flex;
+  justify-content: content;
 }
