@@ -10,11 +10,11 @@ const TopFavorite = () => {
     setFavorite(storedFavorites);
   }, []);
 
-  // const removeFromFavorites = (movie) => {
-  //   const updatedFavorites = favorite.filter((favorite) = favorite.id !== movie.id);
-  //   setFavorite(updatedFavorites);
-  //   localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-  // };
+  const removeFromFavorites = (movie) => {
+    const updatedFavorites = favorite.filter((favoriteMovie) => favoriteMovie.id !== movie.id);
+    setFavorite(updatedFavorites);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  };
 
   return (
     <div className="favorites-container">
@@ -24,8 +24,8 @@ const TopFavorite = () => {
           <MovieCard
             key={movie.id}
             movie={movie}
-            // inFavorites={true}
-            // onRemoveFromFavorites={() => removeFromFavorites(movie)}
+            inFavorites={true}
+            onRemoveFromFavorites={() => removeFromFavorites(movie)}
           />
         ))}
       </div>

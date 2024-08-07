@@ -2,7 +2,13 @@ import { useState } from "react";
 import Rating from "../Rating/Rating";
 import "./MovieCard.css";
 
-const MovieCard = ({ movie, inWatchlist, onRemoveFromWatchlist }) => {
+const MovieCard = ({
+  movie,
+  inWatchlist,
+  onRemoveFromWatchlist,
+  inFavorites,
+  onRemoveFromFavorites,
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [rating, setRating] = useState(movie.vote_average);
 
@@ -73,7 +79,13 @@ const MovieCard = ({ movie, inWatchlist, onRemoveFromWatchlist }) => {
               ) : (
                 <button onClick={addToWatchlist}>Add to Watchlist</button>
               )}
-              <button onClick={addToFavorites}>Add to Favorites</button>
+              {inFavorites ? (
+                <button onClick={onRemoveFromFavorites}>
+                  Delete from Favorites
+                </button>
+              ) : (
+                <button onClick={addToFavorites}>Add to Favorites</button>
+              )}
               <p>Overview: {movie.overview}</p>
             </div>
           </div>
