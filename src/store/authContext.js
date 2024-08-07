@@ -25,7 +25,7 @@ const getLocalData = () => {
   return {
     token: storedToken,
     exp: +storedExp,
-    userId: +storedId,
+    userId: storedId,
     username: storedName
   };
 };
@@ -44,7 +44,7 @@ const reducer = (state, action) => {
       return initialState;
     case "RETURNING_USER":
       const { token: t, userId: u, exp: e, username: n } = action.payload;
-      return { ...state, token: t, userId: +u, exp: +e, username: n, authenticated: true };
+      return { ...state, token: t, userId: u, exp: +e, username: n, authenticated: true };
     default:
       return state;
   }
@@ -55,6 +55,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const localData = getLocalData();
+    console.log(localData);
     if (localData) {
       dispatch({ type: "RETURNING_USER", payload: localData });
     }

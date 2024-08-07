@@ -1,26 +1,53 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import axios from "axios";
 import MovieCard from "../Movies/MovieCard";
 import "./TopFavorites.css";
+import AuthContext from "../../store/authContext";
 
 const TopFavorite = () => {
-  const [favorite, setFavorite] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  const { state } = useContext(AuthContext);
 
   useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    setFavorite(storedFavorites);
-  }, []);
+    const getMovies = async () => {
+      const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+      setFavorites(storedFavorites);
+      
+      if (state.userId) {
+        try {
+          const response = await axios.get(`/favorites?userId=${state.userId}`, state.userId);
+          setFavorites(response.data);
+          localStorage.setItem("favorites", JSON.stringify(response.data));
+        } catch (error) {
+          console.error("Error fetching favorites:", error);
+        }
+      }
+    };
 
-  const removeFromFavorites = (movie) => {
-    const updatedFavorites = favorite.filter((favoriteMovie) => favoriteMovie.id !== movie.id);
-    setFavorite(updatedFavorites);
+    getMovies();
+  }, [state.userId]);
+
+  const removeFromFavorites = async (movie) => {
+    const updatedFavorites = favorites.filter((fav) => fav.id !== movie.id);
+    setFavorites(updatedFavorites);
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    console.log(state)
+    try {
+      await axios.delete("/favorites", {
+        data: { user_id: state.userId, movie_id: movie.id },
+      });
+    } catch (error) {
+      console.error("Error removing from favorites:", error);
+      setFavorites(favorites);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
   };
 
   return (
     <div className="favorites-container">
       <h2 className="favorite-title">Top Favorite Movies</h2>
       <div className="movie-cards-container">
-        {favorite.map((movie) => (
+        {favorites.map((movie) => (
           <MovieCard
             key={movie.id}
             movie={movie}

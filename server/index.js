@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 4005;
 const { register, login } = require("./controllers/authController");
 const { getUsers } = require("./controllers/userController");
 const { getWatchlist, saveWatchlist, deleteFromWatchlist } = require("./controllers/watchlistController");
+const { getFavorites, saveFavorites, deleteFromFavorites } = require("./controllers/favoriteController");
 
 //middlewares
 const isAuthenticated = require('./middleware/isAuthenticated')
@@ -24,6 +25,9 @@ app.get("/users", isAuthenticated, getUsers);
 app.get("/watchlist", getWatchlist);
 app.post("/watchlist", saveWatchlist);
 app.delete("/watchlist", deleteFromWatchlist);
+app.get("/favorites", getFavorites)
+app.post("/favorites", saveFavorites)
+app.delete("/favorites", deleteFromFavorites);
 
 // server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
