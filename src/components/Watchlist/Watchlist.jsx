@@ -3,6 +3,7 @@ import { useAuth } from "../../store/authContext";
 import { useNavigate } from "react-router-dom";
 import MovieCard from "../Movies/MovieCard";
 import Header from "../Navigation/Header";
+// import axios from "axios";
 import "./WatchList.css";
 
 // NEED TO WORK ON UPLOADING THE WATCHLIST TO THE DATABASE & USING LOCAL STORAGE
