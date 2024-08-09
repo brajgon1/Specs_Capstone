@@ -57,6 +57,7 @@ const AuthProvider = ({ children }) => {
     const localData = getLocalData();
     console.log(localData);
     if (localData) {
+      console.log("Returning user:", localData);
       dispatch({ type: "RETURNING_USER", payload: localData });
     }
   }, []);

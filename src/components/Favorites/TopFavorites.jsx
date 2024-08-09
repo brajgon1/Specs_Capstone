@@ -15,6 +15,7 @@ const TopFavorite = () => {
       
       if (state.userId) {
         try {
+          console.log(`Fetching favorites for userId: ${state.userId}`);
           const response = await axios.get(`/favorites?userId=${state.userId}`);
           setFavorites(response.data);
           localStorage.setItem("favorites", JSON.stringify(response.data));

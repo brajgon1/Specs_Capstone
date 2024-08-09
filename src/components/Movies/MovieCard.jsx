@@ -23,7 +23,7 @@ const MovieCard = ({
     try {
       await axios.post("/watchlist", {
         userId: state.userId,
-        moveId: movie.id,
+        movieId: movie.id,
       });
       alert(`${movie.title} added to watchlist!`);
     } catch (error) {
@@ -82,14 +82,6 @@ const MovieCard = ({
       console.error("Error adding to favorites:", error);
       alert("Failed to add to favorites.");
     }
-    // const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    // if (favorites.length < 4) {
-    //   const updatedFavorites = [...favorites, movie];
-    //   localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-    //   alert(`${movie.title} added to favorites!`);
-    // } else {
-    //   alert("Maximum number of favorites reached!");
-    // }
   };
 
   // DO MORE WORK ON RATING WHEN I CAN - NOT TOP PRIORITY - JUST REALIZED IT DOESN'T DO ANYTHING
