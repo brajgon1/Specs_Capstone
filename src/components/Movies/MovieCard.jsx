@@ -71,6 +71,7 @@ const MovieCard = ({
         await axios.post("/favorites", {
           user_id: state.userId,
           movie_id: movie.id,
+          poster_path: movie.poster_path,
         });
         const updatedFavorites = [...favorites, movie];
         localStorage.setItem("favorites", JSON.stringify(updatedFavorites));

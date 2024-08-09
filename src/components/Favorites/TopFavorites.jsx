@@ -27,7 +27,7 @@ const TopFavorite = () => {
 
     getMovies();
   }, [state.userId]);
-
+  
   const removeFromFavorites = async (movie) => {
     const updatedFavorites = favorites.filter((fav) => fav.id !== movie.id);
     setFavorites(updatedFavorites);
@@ -43,7 +43,7 @@ const TopFavorite = () => {
       localStorage.setItem("favorites", JSON.stringify(favorites));
     }
   };
-
+console.log(favorites);
   return (
     <div className="favorites-container">
       <h2 className="favorite-title">Top Favorite Movies</h2>

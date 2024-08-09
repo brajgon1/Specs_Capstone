@@ -24,13 +24,13 @@ const getFavorites = async (req, res) => {
 };
 
 const saveFavorites = async (req, res) => {
-    const { userId, movieId } = req.body;
-    console.log(movieId)
+    const { user_id, movie_id, poster_path } = req.body;
+    console.log(movie_id)
 
     try {
         const { data, error } = await supabase
        .from("favorites")
-       .insert([{ user_id: userId, movie_id: movieId }]);
+       .insert([{ user_id: user_id, movie_id: movie_id, poster_path: poster_path }]);
 
        if (error) {
         return res.status(500).json({ error: "Error saving favorites", details: error.message });
