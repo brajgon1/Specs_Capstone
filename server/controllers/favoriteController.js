@@ -10,7 +10,7 @@ const getFavorites = async (req, res) => {
     try {
         const { data, error } = await supabase
         .from("favorites")
-        .select("*, movies(*)")
+        .select("*")
         .eq("user_id", userId);
 
         if (error) {
@@ -25,6 +25,7 @@ const getFavorites = async (req, res) => {
 
 const saveFavorites = async (req, res) => {
     const { userId, movieId } = req.body;
+    console.log(movieId)
 
     try {
         const { data, error } = await supabase

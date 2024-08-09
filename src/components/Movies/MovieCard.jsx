@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Rating from "../Rating/Rating";
+import axios from "axios";
+import AuthContext from "../../store/authContext";
 import "./MovieCard.css";
 
 const MovieCard = ({
@@ -11,44 +13,83 @@ const MovieCard = ({
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [rating, setRating] = useState(movie.vote_average);
+  const { state } = useContext(AuthContext);
 
   const toggleModal = () => {
     setModalOpen(!modalOpen);
   };
 
-  const addToWatchlist = () => {
-    const currentWatchlist =
-      JSON.parse(localStorage.getItem("watchlist")) || [];
-    if (!currentWatchlist.some((item) => item.id === movie.id)) {
-      const updatedWatchlist = [...currentWatchlist, movie];
-      localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
+  const addToWatchlist = async () => {
+    try {
+      await axios.post("/watchlist", {
+        userId: state.userId,
+        moveId: movie.id,
+      });
       alert(`${movie.title} added to watchlist!`);
-    } else {
-      alert(`${movie.title} is already in the watchlist!`);
+    } catch (error) {
+      console.error("Error adding to watchlist:", error);
+      alert("Failed to add to watchlist.");
     }
+    // const currentWatchlist =
+    //   JSON.parse(localStorage.getItem("watchlist")) || [];
+    // if (!currentWatchlist.some((item) => item.id === movie.id)) {
+    //   const updatedWatchlist = [...currentWatchlist, movie];
+    //   localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
+    //   alert(`${movie.title} added to watchlist!`);
+    // } else {
+    //   alert(`${movie.title} is already in the watchlist!`);
+    // }
   };
 
-  const removeFromWatchlist = () => {
-    onRemoveFromWatchlist(movie.id);
-    const currentWatchlist =
-      JSON.parse(localStorage.getItem("watchlist")) || [];
-    const updateWatchlist = currentWatchlist.filter(
-      (item) => item.id !== movie.id
-    );
-    localStorage.setItem("watchlist", JSON.stringify(updateWatchlist));
-    alert(`${movie.title} removed from watchlist!`);
-    toggleModal();
+  const removeFromWatchlist = async () => {
+    try {
+      await axios.delete("/watchlist", {
+        data: { userId: state.userId, movieId: movie.id },
+      });
+      alert(`${movie.title} removed from watchlist!`);
+      toggleModal();
+      if (onRemoveFromWatchlist) onRemoveFromFavorites(movie.id);
+    } catch (error) {
+      console.error("Error removing from watchlist:", error);
+      alert("Failed to remove from watchlist.");
+    }
+    // onRemoveFromWatchlist(movie.id);
+    // const currentWatchlist =
+    //   JSON.parse(localStorage.getItem("watchlist")) || [];
+    // const updateWatchlist = currentWatchlist.filter(
+    //   (item) => item.id !== movie.id
+    // );
+    // localStorage.setItem("watchlist", JSON.stringify(updateWatchlist));
+    // alert(`${movie.title} removed from watchlist!`);
+    // toggleModal();
   };
 
-  const addToFavorites = () => {
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    if (favorites.length < 4) {
-      const updatedFavorites = [...favorites, movie];
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-      alert(`${movie.title} added to favorites!`);
-    } else {
-      alert("Maximum number of favorites reached!");
+  const addToFavorites = async () => {
+    try {
+      const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+      if (favorites.length < 4) {
+        await axios.post("/favorites", {
+          user_id: state.userId,
+          movie_id: movie.id,
+        });
+        const updatedFavorites = [...favorites, movie];
+        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+        alert(`${movie.title} added to favorites!`);
+      } else {
+        alert("Maximum number of favorites reached!");
+      }
+    } catch (error) {
+      console.error("Error adding to favorites:", error);
+      alert("Failed to add to favorites.");
     }
+    // const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    // if (favorites.length < 4) {
+    //   const updatedFavorites = [...favorites, movie];
+    //   localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    //   alert(`${movie.title} added to favorites!`);
+    // } else {
+    //   alert("Maximum number of favorites reached!");
+    // }
   };
 
   // DO MORE WORK ON RATING WHEN I CAN - NOT TOP PRIORITY - JUST REALIZED IT DOESN'T DO ANYTHING
@@ -96,7 +137,6 @@ const MovieCard = ({
           src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
           alt="Movie Poster"
         />
-        {/* <h3>{movie.title}</h3> */}
       </div>
     </div>
   );
