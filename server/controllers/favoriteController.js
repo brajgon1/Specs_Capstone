@@ -31,6 +31,7 @@ const saveFavorites = async (req, res) => {
   const {
     user_id,
     movie_id,
+    title,
     poster_path,
     overview,
     vote_average,
@@ -47,6 +48,7 @@ const saveFavorites = async (req, res) => {
         {
           user_id: user_id,
           movie_id: movie_id,
+          title: title,
           poster_path: poster_path,
           overview: overview,
           vote_average: vote_average,

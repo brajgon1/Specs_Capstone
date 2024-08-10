@@ -72,6 +72,7 @@ const MovieCard = ({
         await axios.post("/favorites", {
           user_id: state.userId,
           movie_id: movie.id,
+          title: movie.title,
           poster_path: movie.poster_path,
           overview: movie.overview,
           vote_average: movie.vote_average,
