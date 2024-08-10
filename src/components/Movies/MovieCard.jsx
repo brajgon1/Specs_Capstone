@@ -67,11 +67,15 @@ const MovieCard = ({
   const addToFavorites = async () => {
     try {
       const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+      console.log("State data:", state);
       if (favorites.length < 4) {
         await axios.post("/favorites", {
           user_id: state.userId,
           movie_id: movie.id,
           poster_path: movie.poster_path,
+          overview: movie.overview,
+          vote_average: movie.vote_average,
+          release_date: movie.release_date
         });
         const updatedFavorites = [...favorites, movie];
         localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
