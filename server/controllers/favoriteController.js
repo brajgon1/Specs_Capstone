@@ -70,14 +70,13 @@ const saveFavorites = async (req, res) => {
 };
 
 const deleteFromFavorites = async (req, res) => {
-  const { user_id, movie_id } = req.body;
-  console.log(user_id, movie_id);
+  const { user_id } = req.body;
+  console.log(user_id);
   try {
     const { data, error } = await supabase
       .from("favorites")
       .delete()
       .eq('user_id', user_id)
-      .eq('movie_id', movie_id)
 
     if (error) {
       return res
