@@ -3,7 +3,7 @@ import { useAuth } from "../../store/authContext";
 import { useNavigate } from "react-router-dom";
 import MovieCard from "../Movies/MovieCard";
 import Header from "../Navigation/Header";
-// import axios from "axios";
+import axios from "axios";
 import "./WatchList.css";
 
 // NEED TO WORK ON UPLOADING THE WATCHLIST TO THE DATABASE & USING LOCAL STORAGE
@@ -15,14 +15,24 @@ const WatchList = () => {
   const [watchlist, setWatchlist] = useState([]);
 
   useEffect(() => {
+    const getWatchlist = async () => {
+      try {
+        const response = await axios.get('/watchlist', {
+          params: { userId: state.userId }
+        })
+        setWatchlist(response.data);
+      } catch (error) {
+        console.error("Error fetching watchlist:", error);
+      }
+    }
+
     if (!authenticated) {
       navigate("/login");
     } else {
-      const storedWatchlist =
-        JSON.parse(localStorage.getItem("watchlist")) || [];
-      setWatchlist(storedWatchlist);
+      getWatchlist();
     }
-  }, [authenticated, navigate]);
+
+  }, [authenticated, navigate, state.userId]);
 
   useEffect(() => {
     if (authenticated) {
