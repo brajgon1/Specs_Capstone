@@ -10,6 +10,7 @@ const { register, login } = require("./controllers/authController");
 const { getUsers } = require("./controllers/userController");
 const { getWatchlist, saveWatchlist, deleteFromWatchlist } = require("./controllers/watchlistController");
 const { getFavorites, saveFavorites, deleteFromFavorites } = require("./controllers/favoriteController");
+// const { getRating, submitRating } = require("./controllers/ratingController");
 
 //middlewares
 const isAuthenticated = require('./middleware/isAuthenticated')
@@ -28,6 +29,8 @@ app.delete("/watchlist", deleteFromWatchlist);
 app.get("/favorites", getFavorites)
 app.post("/favorites", saveFavorites)
 app.delete("/favorites", deleteFromFavorites);
+// app.get('/rating', getRating);
+// app.post('/rating', submitRating);
 
 // server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -5,7 +5,7 @@ import { useState } from "react";
 const Header = ({ onSearch }) => {
   const styleActiveLink = ({ isActive }) => {
     return {
-      color: isActive ? "#a1caa1" : "",
+      color: isActive ? "#553739" : "",
     };
   };
 

@@ -6,8 +6,6 @@ import Header from "../Navigation/Header";
 import axios from "axios";
 import "./WatchList.css";
 
-// NEED TO WORK ON UPLOADING THE WATCHLIST TO THE DATABASE & USING LOCAL STORAGE
-
 const WatchList = () => {
   const { state } = useAuth();
   const { authenticated } = state;
