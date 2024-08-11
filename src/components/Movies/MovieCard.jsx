@@ -21,24 +21,25 @@ const MovieCard = ({
 
   const addToWatchlist = async () => {
     try {
-      await axios.post("/watchlist", {
-        userId: state.userId,
-        movieId: movie.id,
-      });
-      alert(`${movie.title} added to watchlist!`);
+      const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+      if (!watchlist.some((item) => item.id === movie.id)) {
+        await axios.post("/watchlist", {
+          user_id: state.userId,
+          movie_id: movie.id,
+          title: movie.title,
+          poster_path: movie.poster_path,
+          overview: movie.overview,
+          vote_average: movie.vote_average,
+          release_date: movie.release_date,
+        });
+        const updatedWatchlist = [...watchlist, movie];
+        localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
+        alert(`${movie.title} added to watchlist`);
+      }
     } catch (error) {
       console.error("Error adding to watchlist:", error);
-      alert("Failed to add to watchlist.");
+      alert("Failed to add to watchlist");
     }
-    // const currentWatchlist =
-    //   JSON.parse(localStorage.getItem("watchlist")) || [];
-    // if (!currentWatchlist.some((item) => item.id === movie.id)) {
-    //   const updatedWatchlist = [...currentWatchlist, movie];
-    //   localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
-    //   alert(`${movie.title} added to watchlist!`);
-    // } else {
-    //   alert(`${movie.title} is already in the watchlist!`);
-    // }
   };
 
   const removeFromWatchlist = async () => {
@@ -76,7 +77,7 @@ const MovieCard = ({
           poster_path: movie.poster_path,
           overview: movie.overview,
           vote_average: movie.vote_average,
-          release_date: movie.release_date
+          release_date: movie.release_date,
         });
         const updatedFavorites = [...favorites, movie];
         localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
