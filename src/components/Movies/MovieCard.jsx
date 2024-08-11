@@ -51,7 +51,6 @@ const MovieCard = ({
       const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
       const updatedWatchlist = watchlist.filter((item) => item.id !== movie.id);
       localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
-      alert(`${movie.title} removed from watchlist!`);
       toggleModal();
       if (onRemoveFromWatchlist) onRemoveFromWatchlist(movie.id);
     } catch (error) {
