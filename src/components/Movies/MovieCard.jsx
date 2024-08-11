@@ -7,7 +7,6 @@ import "./MovieCard.css";
 const MovieCard = ({
   movie,
   inWatchlist,
-  onRemoveFromWatchlist,
   inFavorites,
   onRemoveFromFavorites,
 }) => {
@@ -45,24 +44,15 @@ const MovieCard = ({
   const removeFromWatchlist = async () => {
     try {
       await axios.delete("/watchlist", {
-        data: { userId: state.userId, movieId: movie.id },
+        data: { user_id: state.userId, movie_id: movie.id },
       });
       alert(`${movie.title} removed from watchlist!`);
       toggleModal();
-      if (onRemoveFromWatchlist) onRemoveFromFavorites(movie.id);
+      // if (onRemoveFromWatchlist) onRemoveFromFavorites(movie.id);
     } catch (error) {
       console.error("Error removing from watchlist:", error);
       alert("Failed to remove from watchlist.");
     }
-    // onRemoveFromWatchlist(movie.id);
-    // const currentWatchlist =
-    //   JSON.parse(localStorage.getItem("watchlist")) || [];
-    // const updateWatchlist = currentWatchlist.filter(
-    //   (item) => item.id !== movie.id
-    // );
-    // localStorage.setItem("watchlist", JSON.stringify(updateWatchlist));
-    // alert(`${movie.title} removed from watchlist!`);
-    // toggleModal();
   };
 
   const addToFavorites = async () => {
