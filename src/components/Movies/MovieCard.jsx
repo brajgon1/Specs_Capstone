@@ -14,6 +14,7 @@ const MovieCard = ({
   const [modalOpen, setModalOpen] = useState(false);
   const [rating, setRating] = useState(movie.vote_average);
   const { state } = useContext(AuthContext);
+  const userId = state?.userId;
 
   const toggleModal = () => {
     setModalOpen(!modalOpen);
@@ -85,11 +86,22 @@ const MovieCard = ({
     }
   };
 
-  // DO MORE WORK ON RATING WHEN I CAN - NOT TOP PRIORITY - JUST REALIZED IT DOESN'T DO ANYTHING
-  const handleRating = (newRating) => {
-    setRating(newRating);
-    alert(`${movie.title} rated ${newRating} stars!`);
-  };
+ const handleRating = async (newRating) => {
+  console.log("User id:", userId)
+
+  try {
+    const response = await axios.post('/rating', {
+      user_id: userId,
+      movie_id: movie.id,
+      rating: newRating
+    })
+
+    console.log("Rating Response:", response.data)
+  } catch (error) {
+    console.error("Error rating movie:", error.response.data);
+    alert("Failed to rate movie.");
+  }
+ }
 
   return (
     <div>
@@ -103,7 +115,11 @@ const MovieCard = ({
               <h2>{movie.title}</h2>
               <p>Release Date: {movie.release_date}</p>
               <p>
-                Rating: <Rating rating={rating} onRatingChange={handleRating} />
+              Rating: <Rating
+                  movieId={movie.id}
+                  userId={userId}
+                  onRatingChange={handleRating}
+            />
               </p>
               <p>Average Rating: {movie.vote_average}</p>
               {inWatchlist ? (

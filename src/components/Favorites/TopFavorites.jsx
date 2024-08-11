@@ -44,6 +44,7 @@ const TopFavorite = () => {
     }
   };
 console.log(favorites);
+
   return (
     <div className="favorites-container">
       <h2 className="favorite-title">Top Favorite Movies</h2>
