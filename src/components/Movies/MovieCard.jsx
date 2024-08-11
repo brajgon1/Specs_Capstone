@@ -8,6 +8,7 @@ const MovieCard = ({
   movie,
   inWatchlist,
   inFavorites,
+  onRemoveFromWatchlist,
   onRemoveFromFavorites,
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -46,9 +47,12 @@ const MovieCard = ({
       await axios.delete("/watchlist", {
         data: { user_id: state.userId, movie_id: movie.id },
       });
+      const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+      const updatedWatchlist = watchlist.filter((item) => item.id !== movie.id);
+      localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
       alert(`${movie.title} removed from watchlist!`);
       toggleModal();
-      // if (onRemoveFromWatchlist) onRemoveFromFavorites(movie.id);
+      if (onRemoveFromWatchlist) onRemoveFromWatchlist(movie.id);
     } catch (error) {
       console.error("Error removing from watchlist:", error);
       alert("Failed to remove from watchlist.");

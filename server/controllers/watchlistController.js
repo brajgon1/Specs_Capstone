@@ -68,13 +68,15 @@ const saveWatchlist = async (req, res) => {
 };
 
 const deleteFromWatchlist = async (req, res) => {
-  const { user_id } = req.body;
+  const { user_id, movie_id } = req.body;
+  console.log("Attempting to delete movie from watchlist", { user_id, movie_id });
 
   try {
     const { error } = await supabase
       .from("watchlist")
       .delete()
       .eq("user_id", user_id)
+      .eq("movie_id", movie_id)
 
     if (error) {
       return res
