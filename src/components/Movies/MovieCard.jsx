@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import Rating from "../Rating/Rating";
+// import Rating from "../Rating/Rating";
 import axios from "axios";
 import AuthContext from "../../store/authContext";
 import "./MovieCard.css";
@@ -12,7 +12,7 @@ const MovieCard = ({
   onRemoveFromFavorites,
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [rating, setRating] = useState(movie.vote_average);
+  // const [rating, setRating] = useState(movie.vote_average);
   const { state } = useContext(AuthContext);
 
   const toggleModal = () => {
@@ -62,7 +62,7 @@ const MovieCard = ({
   const addToFavorites = async () => {
     try {
       const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-      console.log("State data:", state);
+     
       if (favorites.length < 4) {
         await axios.post("/favorites", {
           user_id: state.userId,
@@ -86,10 +86,10 @@ const MovieCard = ({
   };
 
   // DO MORE WORK ON RATING WHEN I CAN - NOT TOP PRIORITY - JUST REALIZED IT DOESN'T DO ANYTHING
-  const handleRating = (newRating) => {
-    setRating(newRating);
-    alert(`${movie.title} rated ${newRating} stars!`);
-  };
+  // const handleRating = (newRating) => {
+  //   setRating(newRating);
+  //   alert(`${movie.title} rated ${newRating} stars!`);
+  // };
 
   return (
     <div>
@@ -102,9 +102,9 @@ const MovieCard = ({
             <div className="modal-details">
               <h2>{movie.title}</h2>
               <p>Release Date: {movie.release_date}</p>
-              <p>
+              {/* <p>
                 Rating: <Rating rating={rating} onRatingChange={handleRating} />
-              </p>
+              </p> */}
               <p>Average Rating: {movie.vote_average}</p>
               {inWatchlist ? (
                 <button onClick={removeFromWatchlist}>
