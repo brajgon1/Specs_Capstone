@@ -26,7 +26,7 @@ const MovieCard = ({
       if (!watchlist.some((item) => item.id === movie.id)) {
         await axios.post("/watchlist", {
           user_id: state.userId,
-          movie_id: movie.id,
+          movie_id: movie.movie_id,
           title: movie.title,
           poster_path: movie.poster_path,
           overview: movie.overview,
@@ -66,7 +66,7 @@ const MovieCard = ({
       if (favorites.length < 4) {
         await axios.post("/favorites", {
           user_id: state.userId,
-          movie_id: movie.id,
+          movie_id: movie.movie_id,
           title: movie.title,
           poster_path: movie.poster_path,
           overview: movie.overview,

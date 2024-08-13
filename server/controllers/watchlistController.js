@@ -37,7 +37,7 @@ const saveWatchlist = async (req, res) => {
     vote_average,
     release_date,
   } = req.body;
-
+  console.log(req.body);
   try {
     const { data, error } = await supabase
       .from("watchlist")
