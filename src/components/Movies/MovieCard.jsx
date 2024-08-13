@@ -26,7 +26,7 @@ const MovieCard = ({
       if (!watchlist.some((item) => item.id === movie.id)) {
         await axios.post("/watchlist", {
           user_id: state.userId,
-          movie_id: movie.movie_id,
+          movie_id: movie.id,
           title: movie.title,
           poster_path: movie.poster_path,
           overview: movie.overview,
@@ -51,6 +51,7 @@ const MovieCard = ({
       const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
       const updatedWatchlist = watchlist.filter((item) => item.id !== movie.id);
       localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
+      alert(`${movie.title} removed from watchlist!`);
       toggleModal();
       if (onRemoveFromWatchlist) onRemoveFromWatchlist(movie.id);
     } catch (error) {
@@ -66,7 +67,7 @@ const MovieCard = ({
       if (favorites.length < 4) {
         await axios.post("/favorites", {
           user_id: state.userId,
-          movie_id: movie.movie_id,
+          movie_id: movie.id,
           title: movie.title,
           poster_path: movie.poster_path,
           overview: movie.overview,
