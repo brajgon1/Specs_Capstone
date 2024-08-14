@@ -5,7 +5,7 @@ import { useState } from "react";
 const Header = ({ onSearch }) => {
   const styleActiveLink = ({ isActive }) => {
     return {
-      color: isActive ? "#553739" : "",
+      color: isActive ? "#ffe4c4" : "",
     };
   };
 
@@ -61,7 +61,7 @@ const Header = ({ onSearch }) => {
           </select> */}
           <input
             type="text"
-            placeholder='Search for movies!'
+            placeholder='Search for movies... '
             // placeholder={`Search ${searchType}...`} <--- add this when working on the updated 
             value={search}
             onChange={handleSearchChange}

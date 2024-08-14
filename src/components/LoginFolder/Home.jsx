@@ -83,7 +83,6 @@ const Home = () => {
     }
   };
 
-
   const submitHandler = (e) => {
     e.preventDefault();
     let body = { username, password };
@@ -104,72 +103,75 @@ const Home = () => {
 
   if (!authenticated) {
     return (
-      <div>
-        {register ? (
-          <div className="register">
-            <h1>Register</h1>
-            <form onSubmit={submitHandler}>
-              <input
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <button type="submit">Register</button>
-            </form>
-            <p>
-              Already have an account?{" "}
-              <button onClick={() => setRegister(false)}>Login</button>
-            </p>
-          </div>
-        ) : (
-          <div className="login">
-            <h1>Login</h1>
-            <form onSubmit={submitHandler}>
-              <input
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <button type="submit">Login</button>
-            </form>
-            <p>
-              Don't have an account?{" "}
-              <button onClick={() => setRegister(true)}>Register</button>
-            </p>
-          </div>
-        )}
+      <div className="auth-container">
+        <div className="app-title-main-page">CineHub</div>
+        <div>
+          {register ? (
+            <div className="register">
+              <h1>Register</h1>
+              <form onSubmit={submitHandler}>
+                <input
+                  type="text"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button type="submit">Register</button>
+              </form>
+              <p>
+                Already have an account?{" "}
+                <button onClick={() => setRegister(false)}>Login</button>
+              </p>
+            </div>
+          ) : (
+            <div className="login">
+              <h1>Login</h1>
+              <form onSubmit={submitHandler}>
+                <input
+                  type="text"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button type="submit">Login</button>
+              </form>
+              <p>
+                Don't have an account?{" "}
+                <button onClick={() => setRegister(true)}>Register</button>
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     );
   }
 
   return (
     <div className="home-container">
-      <Header onSearch={searchMovies}/>
+      <Header onSearch={searchMovies} />
       <div className="movie-list">
         {movies.map((movie) => (
           <MovieCard
