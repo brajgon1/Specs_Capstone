@@ -31,7 +31,7 @@ const Header = ({ onSearch }) => {
   return (
     <header className="header">
       <div className="name-of-app">
-        <h2 className="app-title">CineHub</h2>
+        <h2 className="app-title">CinemaHub</h2>
       </div>
       <nav className="header-nav">
         <ul className="main-nav">

@@ -104,7 +104,7 @@ const Home = () => {
   if (!authenticated) {
     return (
       <div className="auth-container">
-        <div className="app-title-main-page">CineHub</div>
+        <div className="app-title-main-page">CinemaHub</div>
         <div>
           {register ? (
             <div className="register">
