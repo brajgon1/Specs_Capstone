@@ -10,15 +10,21 @@ const Header = ({ onSearch }) => {
   };
 
   const [search, setSearch] = useState("");
+  // const [searchType, setSearchType] = useState("movies")
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
   };
 
+  // const handleSearchTypeChange = (e) => {
+  //   setSearchType(e.target.value);
+  // };
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (onSearch) {
       onSearch(search);
+      // add searchType as am argument in the onSearch event
     }
   };
 
@@ -48,9 +54,15 @@ const Header = ({ onSearch }) => {
       </nav>
       <div className="search-container">
         <form onSubmit={handleSearch}>
+          {/* <select value={searchType} onChange={handleSearchTypeChange}>
+            <option value="movies">Movies</option>
+            <option value="actors">Actors</option>
+            <option value="genres">Genres</option>
+          </select> */}
           <input
             type="text"
-            placeholder="Search movies..."
+            placeholder='Search for movies!'
+            // placeholder={`Search ${searchType}...`} <--- add this when working on the updated 
             value={search}
             onChange={handleSearchChange}
           />
