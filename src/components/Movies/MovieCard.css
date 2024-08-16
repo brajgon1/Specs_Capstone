@@ -91,3 +91,16 @@
     cursor: pointer;
     transform: scale(0.9, 0.9);
   }
+
+  @media (max-width: 480px) {
+    .movie-list {
+      width: 100%;
+      gap: 10px;
+      padding: 20px;
+    }
+  
+    .movie-card {
+      flex: 1 1 100%;
+      height: auto;
+    }
+  }

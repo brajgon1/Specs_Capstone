@@ -21,3 +21,16 @@
   display: flex;
   justify-content: content;
 }
+
+@media (max-width: 480px) {
+  .movie-cards-container, .movie-list {
+    width: 100%;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .movie-card {
+    flex: 1 1 100%;
+    height: auto;
+  }
+}

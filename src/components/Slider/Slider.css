@@ -34,3 +34,10 @@
     pointer-events: none;
     color: gray;
 }
+
+@media (max-width: 480px) {
+    .slider {
+      /* flex-direction: column; */
+      width: 100%;
+    }
+  }

@@ -19,11 +19,7 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    max-width: 1200px;
-    padding: 20px;
-}
-
-.movie-card {
-    flex: 1 1 calc(25% - 20px);
-    box-sizing: border-box;
-}
+    padding-bottom: 100px;
+    padding-top: 50px;
+    width: 900px;
+  }

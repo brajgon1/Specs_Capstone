@@ -8,7 +8,7 @@ body {
 }
 
 .profile-container {
-    padding: 50px;
+    padding: 10px;
 }
 
 .profile-header {
@@ -22,3 +22,16 @@ body {
     font-weight: bold;
     margin-right: auto;
 }
+
+@media (max-width: 480px) {
+    .favorite-movie-list, .movie-list {
+      width: 100%;
+      gap: 10px;
+      justify-content: center;
+    }
+  
+    .movie-card {
+      flex: 1 1 100%;
+      height: auto;
+    }
+  }
